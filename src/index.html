@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <meta charset="UTF-8"> 
+    <title>Electron</title> 
+    <!-- https://electronjs.org/docs/tutorial 
+                           /security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="script-src 'self' 'unsafe-inline';" /> 
+
+    <style>
+      body, *{
+        color: white;
+      }
+      #text{
+        background-color: darkslategrey;
+      }
+      button{
+        background-color: darkslateblue;
+        font-size: 20px;
+        text-decoration: none;
+        border: none;
+        padding: 15px 32px;
+      }
+      button:hover{
+        cursor: pointer;
+      }
+    </style>
+  </head> 
+  <body> 
+    <h1>Electron</h1> 
+    
+    <textarea id="text" rows="15" cols="50"></textarea>
+  
+    <br><br> 
+    <button id="save">Save</button> 
+    <br><br>
+    <button id="load">Load</button> 
+  
+    <!-- Adding Individual Renderer Process JS File -->
+    <script src="index.js"></script> 
+  </body> 
+</html> 
