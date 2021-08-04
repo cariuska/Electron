@@ -1,23 +1,29 @@
-const { app, BrowserWindow, nativeTheme } = require('electron') 
-  
+const { app, BrowserWindow, nativeTheme, ipcMain } = require('electron') 
+
+var winG;
+var winN;
+
 function createWindow () { 
   // Create the browser window. 
-  const win = new BrowserWindow({ 
+  winG = new BrowserWindow({ 
     width: 800, 
     height: 600, 
     webPreferences: { 
+      contextIsolation: false,
       nodeIntegration: true,
       enableRemoteModule: true
     } 
   }) 
   
   // Load the index.html of the app. 
-  win.loadFile('src/index.html') 
+  //winG.loadFile('src/index.html') 
+  winG.loadURL(`file://${__dirname}/src/index.html`)
+
 
   nativeTheme.themeSource = 'dark'
   
   // Open the DevTools. 
-  win.webContents.openDevTools() 
+  //winG.webContents.openDevTools() 
 } 
   
 // This method will be called when Electron has finished 
@@ -47,3 +53,22 @@ app.on('activate', () => {
 // In this file, you can include the rest of your  
 // app's specific main process code. You can also  
 // put them in separate files and require them here. 
+
+
+ipcMain.on('open-new-window', (event, fileName) => {
+  winN = new BrowserWindow({ width:960, height:540, 
+    webPreferences: { 
+      contextIsolation: false,
+      nodeIntegration: true,
+      enableRemoteModule: true
+    } })
+  winN.loadURL(`file://${__dirname}/src/` + fileName + `/index.html`)
+  winG.close()
+  //win.loadURL('src/' + fileName + '/index.html')
+})
+
+ipcMain.on('back-window', (event) => {
+  createWindow()
+  winN.close()
+  //win.loadURL('src/' + fileName + '/index.html')
+})

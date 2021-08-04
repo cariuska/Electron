@@ -1,8 +1,8 @@
 {
-  "name": "electronteste",
-  "version": "0.1.0",
+  "name": "electron",
+  "version": "1.0.0",
   "main": "main.js",
-  "author": "telles",
+  "author": "Thiago Cariuska",
   "scripts": {
     "start": "electron main.js"
   },
